@@ -23,7 +23,7 @@ class Menu
     {
         $this->_idc = $idc;
         $this->_lang = $lang;
-        $sth = Database::getPdo()->prepare("SELECT * FROM menu WHERE ID = :id");
+        $sth = Database::getInstance()->getPdo()->prepare("SELECT * FROM menu WHERE ID = :id");
         $sth->execute(array(':id', $this->_idc));
         $menu = $sth->fetch(\PDO::FETCH_OBJ);
         $this->_current = $menu;
@@ -37,7 +37,7 @@ class Menu
         } else {
             $titles = array($menu->{sprintf('NAME_%s', strtoupper($this->_lang))});
             while ($menu->ID_PARENT > 0) {
-                $sth = Database::getPdo()->prepare("SELECT * FROM menu WHERE ID = :id");
+                $sth = Database::getInstance()->getPdo()->prepare("SELECT * FROM menu WHERE ID = :id");
                 $sth->execute(array(':id', $this->ID_PARENT));
                 $menu = $sth->fetch(\PDO::FETCH_OBJ);
                 $titles[] = $menu->{sprintf('NAME_%s', strtoupper($this->_lang))};

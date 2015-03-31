@@ -12,6 +12,7 @@ namespace Fusion\Rewrite;
 class Database
 {
     private static $_pdo;
+    private static $_instance;
 
     /**
      * Database constructor.
@@ -25,9 +26,16 @@ class Database
     /**
      * @return \PDO
      */
-    public static function getPdo()
+    public function getPdo()
     {
         return self::$_pdo;
     }
 
+    public static function getInstance()
+    {
+        if (!self::$_instance) {
+            self::$_instance = new self;
+        }
+        return self::$_instance;
+    }
 }
