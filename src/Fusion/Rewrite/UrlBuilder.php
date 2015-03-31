@@ -8,33 +8,10 @@
 
 namespace Fusion\Rewrite;
 
-
-use SeoUrl\Service\Slug;
-
 class UrlBuilder
 {
-    private $_tpl;
     private $_lang;
     private $_idc;
-    private $_id;
-    private $_categoryTitle;
-    private $_pageTitle;
-
-    /**
-     * @return mixed
-     */
-    public function getTpl()
-    {
-        return $this->_tpl;
-    }
-
-    /**
-     * @param mixed $tpl
-     */
-    public function setTpl($tpl)
-    {
-        $this->_tpl = $tpl;
-    }
 
     /**
      * @return mixed
@@ -68,74 +45,19 @@ class UrlBuilder
         $this->_idc = $idc;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getId()
-    {
-        return $this->_id;
-    }
-
-    /**
-     * @param mixed $id
-     */
-    public function setId($id)
-    {
-        $this->_id = $id;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCategoryTitle()
-    {
-        return $this->_categoryTitle;
-    }
-
-    /**
-     * @param mixed $categoryTitle
-     */
-    public function setCategoryTitle($categoryTitle)
-    {
-        $this->_categoryTitle = $categoryTitle;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPageTitle()
-    {
-        return $this->_pageTitle;
-    }
-
-    /**
-     * @param mixed $pageTitle
-     */
-    public function setPageTitle($pageTitle)
-    {
-        $this->_pageTitle = $pageTitle;
-    }
-
     function build()
     {
         $url = array('');
         if ($this->getLang()) {
             $url[] = $this->getLang();
         }
-        if ($this->getTpl()) {
-            $url[] = $this->getTpl();
-        }
         if ($this->getIdc()) {
             $url[] = $this->getIdc();
-        }
-        if ($this->getId()) {
-            $url[] = $this->getId();
-        }
-        if ($this->getCategoryTitle()) {
-            $url[] = $this->toAscii($this->getCategoryTitle());
-        }
-        if ($this->getPageTitle()) {
-            $url[] = $this->toAscii($this->getPageTitle());
+            $menu = new Menu($this->getIdc(), $this->getLang());
+            $url[] = $this->getTpl($menu->getCurrent()->FILE);
+            foreach($menu->getParentsTitle() as $title){
+                $url[] = $this->toAscii($title);
+            }
         }
         return implode("/", $url);
     }
@@ -152,5 +74,11 @@ class UrlBuilder
         $clean = preg_replace("/[\/_|+ -]+/", $delimiter, $clean);
 
         return $clean;
+    }
+
+    function getTpl($file)
+    {
+        $ext = pathinfo($file, PATHINFO_EXTENSION);
+        return trim(str_replace('.' . $ext, '', $file));
     }
 }

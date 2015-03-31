@@ -9,15 +9,11 @@ namespace Fusion\Rewrite;
 
 class Helper
 {
-    function link($tpl = null, $lang = null, $idc = null, $id = null, $categoryTitle = null, $pageTitle = null)
+    static function link($lang = null, $idc = null)
     {
         $url = new UrlBuilder();
-        $url->setTpl($tpl);
         $url->setLang($lang);
         $url->setIdc($idc);
-        $url->setIdc($id);
-        $url->setCategoryTitle($categoryTitle);
-        $url->setPageTitle($pageTitle);
         return $url->build();
     }
 }
