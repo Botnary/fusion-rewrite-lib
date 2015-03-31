@@ -1,0 +1,19 @@
+{
+  "name": "fusion/mod_rewrite",
+  "description": "mod rewrite",
+  "license": "mit",
+  "authors": [
+    {
+      "name": "botnari",
+      "email": "my.test@live.ca"
+    }
+  ],
+  "require": {
+    "symfony/yaml": "3.0.*@dev"
+  },
+  "autoload": {
+    "psr-0" : {
+      "Fusion/Rewrite" : "src"
+    }
+  }
+}

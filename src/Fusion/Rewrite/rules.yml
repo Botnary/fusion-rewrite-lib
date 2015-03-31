@@ -1,0 +1,28 @@
+#mod rewrite rules
+
+#Lib template
+- RewriteRule ^([a-z]{2})\/lib\/(\d+)/year\/(\d+)-(\d+)?. lib.php?l=$1&idc=$2&year=$3&month=$4
+- RewriteRule ^([a-z]{2})\/lib\/(\d+)/year\/(\d+)?. lib.php?l=$1&idc=$2&year=$3
+- RewriteRule ^([a-z]{2})\/lib\/(\d+)?. lib.php?l=$1&idc=$2
+- RewriteRule ^([a-z]{2})\/libview\/(\d+)\/(\d+)\/?. libview.php?l=$1&idc=$2&id=$3
+
+#Page template
+- RewriteRule ^([a-z]{2})\/libview\/(\d+)\/(\d+)\/?. pageview.php?l=$1&idc=$2&id=$3
+- RewriteRule ^([a-z]{2})\/pageview\/(\d+)\/?. pageview.php?l=$1&idc=$2
+
+#Page category template
+- RewriteRule ^([a-z]{2})\/pcategory\/(\d+)\/?. pcategory.php?l=$1&idc=$2
+
+#Album template
+- RewriteRule ^([a-z]{2})\/albumpiro\/(\d+)\/?. albumpiro.php?l=$1&idc=$2
+
+#Slide page template
+- RewriteRule ^([a-z]{2})\/slidepageview\/(\d+)\/?. slidepageview.php?l=$1&idc=$2
+
+#Banner template
+- RewriteRule ^([a-z]{2})\/banners\/(\d+)\/?. banners.php?l=$1
+
+#Map template
+- RewriteRule ^([a-z]{2})\/map\/(\d+)\/?. slidepageview.php?l=$1&idc=$2
+
+#end mod rewrite
